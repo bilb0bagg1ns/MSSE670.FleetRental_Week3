@@ -3,11 +3,8 @@ package com.fleetrental.model.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-
-public class AvailableRentals implements Serializable
-{
-    /**
+public class AvailableRentals implements Serializable {
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -753517717949767546L;
@@ -17,67 +14,66 @@ public class AvailableRentals implements Serializable
 
 	/** state tax associated with this rental */
 	private float stateTax;
-	
+
 	/** holds car objects */
 	private ArrayList<Car> availableRentalsList = new ArrayList<Car>(1);
-	
-	/**ArrayList is not synchronized, so if you need multi-threaded access, consider using: */
-	//List availableRentalsList = Collections.synchronizedList(new ArrayList(...)); 
-
 
 	/**
-	 *
+	 * ArrayList is not synchronized, so if you need multi-threaded access,
+	 * consider using:
 	 */
-	public AvailableRentals() {
+	// List availableRentalsList = Collections.synchronizedList(new
+	// ArrayList(...));
 
-		// TODO Auto-generated constructor stub
+	public AvailableRentals() {
 	}
-	
+
+	public AvailableRentals(float stateTax) {
+		this.stateTax = stateTax;
+	}
+
 	/**
 	 * @param available
 	 */
 	public AvailableRentals(boolean available) {
-		super();
 		this.available = available;
 	}
 
 	/**
 	 * @param available
 	 */
-	public AvailableRentals(boolean available, float stateTax) 
-	{
-		super();
+	public AvailableRentals(boolean available, float stateTax) {
 		this.available = available;
 		this.stateTax = stateTax;
 	}
-	
+
 	/**
-	 *  Add each available rental car into the ArrayList
-	 *  
+	 * Add each available rental car into the ArrayList
+	 * 
 	 * @param car
 	 */
-	public void addRental(Car car)
-	{
+	public void addRental(Car car) {
 		availableRentalsList.add(car);
 	}
 
-	
 	/**
 	 * @return Returns the available.
 	 */
 	public boolean isAvailable() {
 		return available;
 	}
+
 	/**
-	 * @param available The available to set.
+	 * @param available
+	 *            The available to set.
 	 */
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
 
-	
 	/**
-	 * @param stateTax The stateTax to set.
+	 * @param stateTax
+	 *            The stateTax to set.
 	 */
 	public void setStateTax(float stateTax) {
 		this.stateTax = stateTax;
@@ -98,36 +94,65 @@ public class AvailableRentals implements Serializable
 	}
 
 	/**
-	 * @param availableRentalsList The availableRentalsList to set.
+	 * @param availableRentalsList
+	 *            The availableRentalsList to set.
 	 */
 	public void setAvailableRentalsList(ArrayList<Car> availableRentalsList) {
 		this.availableRentalsList = availableRentalsList;
 	}
 
-	
-	
-	
-	public String toString()
-	{
-	  StringBuffer stringBuffer = new StringBuffer();
-	  
-	  if (available)
-	  {	  
-	    stringBuffer.append("Rental is available");
-		stringBuffer.append("\nState Tax: ");
-		stringBuffer.append(stateTax);
-		stringBuffer.append("\nAvailable Rentals List: ");
-		
-		for(Car car : availableRentalsList)
-		{
-			stringBuffer.append(car);
-		}
-		
-	  }	  
-	  else
-	    stringBuffer.append("No Rental is available");
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (available ? 1231 : 1237);
+		result = prime
+				* result
+				+ ((availableRentalsList == null) ? 0 : availableRentalsList
+						.hashCode());
+		result = prime * result + Float.floatToIntBits(stateTax);
+		return result;
+	}
 
-	  return stringBuffer.toString();
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AvailableRentals other = (AvailableRentals) obj;
+		if (available != other.available)
+			return false;
+		if (availableRentalsList == null) {
+			if (other.availableRentalsList != null)
+				return false;
+		} else if (!availableRentalsList.equals(other.availableRentalsList))
+			return false;
+		if (Float.floatToIntBits(stateTax) != Float
+				.floatToIntBits(other.stateTax))
+			return false;
+		return true;
+	}
+
+	public String toString() {
+		StringBuffer stringBuffer = new StringBuffer();
+
+		if (available) {
+			stringBuffer.append("Rental is available");
+			stringBuffer.append("\nState Tax: ");
+			stringBuffer.append(stateTax);
+			stringBuffer.append("\nAvailable Rentals List: ");
+
+			for (Car car : availableRentalsList) {
+				stringBuffer.append(car);
+			}
+
+		} else
+			stringBuffer.append("No Rental is available");
+
+		return stringBuffer.toString();
 	}
 
 } // end class AvailableRentals

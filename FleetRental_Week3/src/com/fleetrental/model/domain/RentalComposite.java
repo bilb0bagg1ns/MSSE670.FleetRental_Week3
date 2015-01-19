@@ -3,7 +3,7 @@ package com.fleetrental.model.domain;
 import java.io.Serializable;
 
 /**
- * Composite object that holds customer's information such as Itinerary,
+ * Composite object that holds customer's information such as itinerary,
  * personal information and list of available rentedCar rentals.
  * 
  * This class also behaves as a shopping cart holding above information.
@@ -35,9 +35,7 @@ public class RentalComposite implements Serializable
 	/**
 	 * @param 
 	 */
-	public RentalComposite() 
-	{
-	}
+	public RentalComposite() {}
 
   	
 	/**
